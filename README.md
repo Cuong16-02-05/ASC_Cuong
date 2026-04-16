@@ -1,7 +1,15 @@
 # Automobile Service Center (ASC)
 ## ASP.NET Core 8 MVC — Full Lab Solution (Lab 1–4)
 
----
+# Bài tập Lab 4 - ASP.NET Core MVC (Dự án ASC)
+
+Đã hoàn thành các chức năng:
+- Đăng nhập (Admin, Engineer).
+- Sửa lỗi màn hình vàng ở trang Xác nhận Quên mật khẩu.
+- Hoàn thiện luồng Đặt lại mật khẩu (Reset Password).
+
+### 🎬 Video Demo Thao tác:
+👉https://drive.google.com/file/d/1g5cYrSSVHCtYCPY3PI7fOeGLsIWxr8lx/view?usp=sharing
 
 ## Cấu trúc Solution
 
