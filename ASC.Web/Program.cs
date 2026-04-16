@@ -3,6 +3,7 @@ using ASC.Web;
 using ASC.Web.Configuration;
 using ASC.Web.Data;
 using ASC.Web.Infrastructure;
+using ASC.Web.Services; // Đã thêm using cho IEmailSender và AuthMessageSender
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 
@@ -15,6 +16,9 @@ builder.Services.Configure<ApplicationSettings>(
 // MVC + Razor Pages
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
+
+// 👉 ĐÃ THÊM DÒNG NÀY ĐỂ FIX LỖI QUÊN MẬT KHẨU
+builder.Services.AddTransient<IEmailSender, AuthMessageSender>();
 
 // All custom DI (DB, Identity, Business, Session, Cache, etc.)
 builder.Services.AddMyDependencyGroup(builder.Configuration);
@@ -43,8 +47,8 @@ using (var scope = app.Services.CreateScope())
     {
         var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
         var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
-        var options    = services.GetRequiredService<IOptions<ApplicationSettings>>();
-        var seed       = services.GetRequiredService<IIdentitySeed>();
+        var options = services.GetRequiredService<IOptions<ApplicationSettings>>();
+        var seed = services.GetRequiredService<IIdentitySeed>();
         await seed.Seed(userManager, roleManager, options);
 
         var navCache = services.GetRequiredService<INavigationCacheOperations>();

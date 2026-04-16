@@ -1,10 +1,11 @@
-using ASC.Model;
+﻿using ASC.Model;
 using ASC.Web.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Encodings.Web;
+using System; // Thêm thư viện này để dùng Console
 
 namespace ASC.Web.Areas.Identity.Pages.Account
 {
@@ -46,6 +47,12 @@ namespace ASC.Web.Areas.Identity.Pages.Account
                 pageHandler: null,
                 values: new { area = "Identity", code = token, email = user.Email },
                 protocol: Request.Scheme);
+
+            // 👉 CHIÊU CUỐI: IN THẲNG LINK RA CỬA SỔ CONSOLE (MÀU ĐEN) ĐỂ DỄ COPY
+            Console.WriteLine("\n\n====================================================================");
+            Console.WriteLine("✅ COPY LINK NÀY DÁN VÀO TRÌNH DUYỆT ĐỂ ĐỔI MẬT KHẨU:");
+            Console.WriteLine(callbackUrl);
+            Console.WriteLine("====================================================================\n\n");
 
             await _emailSender.SendEmailAsync(Input.Email,
                 "Reset Password - ASC",
