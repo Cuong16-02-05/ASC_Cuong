@@ -1,0 +1,58 @@
+## .NET gitignore
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.userprefs
+
+# NuGet
+*.nupkg
+*.snupkg
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+*.nuspec
+project.lock.json
+project.fragment.lock.json
+artifacts/
+packages/
+nuget.exe
+
+# User secrets
+secrets.json
+appsettings.Production.json
+
+# Build results
+TestResults/
+*.trx
+coverage/
+*.coverage
+*.coveragexml
+
+# JetBrains
+.idea/
+*.sln.iml
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini

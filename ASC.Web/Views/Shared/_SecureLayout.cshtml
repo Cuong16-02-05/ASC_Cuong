@@ -1,0 +1,45 @@
+@{
+    Layout = "_MasterLayout";
+}
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ASC.Model.ApplicationUser> SignInManager
+
+<nav class="brown darken-2" role="navigation">
+    <div class="nav-wrapper container">
+        <a href="/" class="brand-logo">
+            <span>Automobile Service Center</span>
+        </a>
+        <ul class="right hide-on-med-and-down">
+            <li><span class="white-text">Welcome, @User.Identity?.Name</span></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="row" style="margin-top:20px">
+    <!-- Left Navigation -->
+    <div class="col s12 m3 l2">
+        <div class="card" style="min-height:500px">
+            @await Component.InvokeAsync("LeftNavigation")
+        </div>
+
+        <!-- Logout & Reset Password forms (hidden) -->
+        <form id="logout_form" asp-area="Identity" asp-page="/Account/Logout" method="post" style="display:none"></form>
+        <form id="resetPassword_form" asp-area="Identity" asp-page="/Account/Manage/ChangePassword" method="get" style="display:none"></form>
+    </div>
+
+    <!-- Main Content -->
+    <div class="col s12 m9 l10">
+        @RenderBody()
+    </div>
+</div>
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+    <script type="text/javascript">
+        $(function () {
+            $('#ancrLogout').click(function () { $('#logout_form').submit(); });
+            $('#ancrResetPassword').click(function () { $('#resetPassword_form').submit(); });
+            $('.collapsible').collapsible();
+        });
+    </script>
+}

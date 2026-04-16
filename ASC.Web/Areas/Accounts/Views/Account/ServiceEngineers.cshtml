@@ -1,0 +1,50 @@
+@model IEnumerable<ASC.Model.ApplicationUser>
+@{
+    ViewData["Title"] = "Service Engineers";
+}
+
+<div class="row">
+    <div class="col s8"><h4 class="brown-text">Service Engineers</h4></div>
+    <div class="col s4 right-align" style="padding-top:20px">
+        <a href="/Accounts/Account/CreateEngineer" class="btn brown darken-2 waves-effect">
+            <i class="material-icons left">person_add</i>Add Engineer
+        </a>
+    </div>
+</div>
+
+@if (TempData["Success"] != null)
+{
+    <div class="row"><div class="col s12">
+        <div class="card-panel green lighten-4 green-text text-darken-2">
+            <i class="material-icons">check_circle</i> @TempData["Success"]
+        </div>
+    </div></div>
+}
+
+<div class="row">
+    <div class="col s12">
+        <div class="card">
+            <div class="card-content">
+                <table class="striped responsive-table">
+                    <thead>
+                        <tr><th>Name</th><th>Email</th><th>Status</th></tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var eng in Model)
+                        {
+                            <tr>
+                                <td>@eng.FirstName @eng.LastName</td>
+                                <td>@eng.Email</td>
+                                <td><span class="badge @(eng.IsActive ? "green" : "red") white-text">@(eng.IsActive ? "Active" : "Inactive")</span></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                @if (!Model.Any())
+                {
+                    <p class="center-align grey-text">No engineers yet. Click "Add Engineer" to create one.</p>
+                }
+            </div>
+        </div>
+    </div>
+</div>

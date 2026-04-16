@@ -1,0 +1,95 @@
+@{
+    ViewData["Title"] = "Dependency Injection Demo";
+    Layout = "_Layout";
+}
+
+<div class="container" style="margin-top:30px">
+    <div class="row">
+        <div class="col s12">
+            <h4 class="brown-text">Lab 1 — Dependency Injection Lifetime Demo</h4>
+            <p class="grey-text">Refresh trang để thấy Transient thay đổi, Scoped giữ nguyên trong request, Singleton luôn cố định.</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Transient -->
+        <div class="col s12 m4">
+            <div class="card red lighten-4">
+                <div class="card-content">
+                    <span class="card-title red-text text-darken-2">
+                        <i class="material-icons left">refresh</i>Transient
+                    </span>
+                    <p class="grey-text text-darken-1" style="font-size:12px;margin-bottom:12px">
+                        Tạo instance MỚI mỗi lần inject. Mỗi controller injection khác nhau.
+                    </p>
+                    <table class="striped">
+                        <tr><td><code>Instance 1</code></td><td><strong>@ViewBag.Transient1</strong></td></tr>
+                        <tr><td><code>Instance 2</code></td><td><strong>@ViewBag.Transient2</strong></td></tr>
+                    </table>
+                    <div class="chip @(ViewBag.TransientSame ? "green" : "red") white-text" style="margin-top:10px">
+                        @(ViewBag.TransientSame ? "✓ Giống nhau" : "✗ Khác nhau (đúng!)")
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scoped -->
+        <div class="col s12 m4">
+            <div class="card blue lighten-4">
+                <div class="card-content">
+                    <span class="card-title blue-text text-darken-2">
+                        <i class="material-icons left">lock_clock</i>Scoped
+                    </span>
+                    <p class="grey-text text-darken-1" style="font-size:12px;margin-bottom:12px">
+                        1 instance per HTTP request. Cùng request → cùng ID. Refresh → ID mới.
+                    </p>
+                    <table class="striped">
+                        <tr><td><code>Instance 1</code></td><td><strong>@ViewBag.Scoped1</strong></td></tr>
+                        <tr><td><code>Instance 2</code></td><td><strong>@ViewBag.Scoped2</strong></td></tr>
+                    </table>
+                    <div class="chip @(ViewBag.ScopedSame ? "green" : "red") white-text" style="margin-top:10px">
+                        @(ViewBag.ScopedSame ? "✓ Giống nhau (đúng!)" : "✗ Khác nhau")
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Singleton -->
+        <div class="col s12 m4">
+            <div class="card green lighten-4">
+                <div class="card-content">
+                    <span class="card-title green-text text-darken-2">
+                        <i class="material-icons left">all_inclusive</i>Singleton
+                    </span>
+                    <p class="grey-text text-darken-1" style="font-size:12px;margin-bottom:12px">
+                        1 instance DUY NHẤT suốt vòng đời app. Refresh bao nhiêu lần cũng không đổi.
+                    </p>
+                    <table class="striped">
+                        <tr><td><code>Instance 1</code></td><td><strong>@ViewBag.Singleton1</strong></td></tr>
+                        <tr><td><code>Instance 2</code></td><td><strong>@ViewBag.Singleton2</strong></td></tr>
+                    </table>
+                    <div class="chip @(ViewBag.SingletonSame ? "green" : "red") white-text" style="margin-top:10px">
+                        @(ViewBag.SingletonSame ? "✓ Giống nhau (đúng!)" : "✗ Khác nhau")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s12">
+            <div class="card-panel brown lighten-5">
+                <strong>Kết luận Lab 1 Section 10:</strong>
+                Transient ID luôn <span class="red-text"><strong>khác nhau</strong></span> →
+                Scoped ID luôn <span class="blue-text"><strong>giống nhau</strong></span> trong 1 request →
+                Singleton ID <span class="green-text"><strong>không bao giờ thay đổi</strong></span> dù refresh nhiều lần.
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s12">
+            <a href="/" class="btn-flat brown-text"><i class="material-icons left">arrow_back</i>Về Home</a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,45 @@
+@{
+    Layout = "_MasterLayout";
+}
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ASC.Model.ApplicationUser> SignInManager
+
+<!-- Navigation -->
+<nav class="brown darken-2" role="navigation">
+    <div class="nav-wrapper container">
+        <a id="logo-container" href="/" class="brand-logo">
+            <img src="~/images/logo.png" class="logo" alt="ASC Logo" onerror="this.style.display='none'" />
+            <span style="margin-left:10px">ASC</span>
+        </a>
+        <ul class="right hide-on-med-and-down">
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <li><a href="/ServiceRequests/Dashboard/Dashboard">Dashboard</a></li>
+                <li>
+                    <form id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" method="post">
+                        <button type="submit" class="btn-flat white-text">Logout</button>
+                    </form>
+                </li>
+            }
+            else
+            {
+                <li><a href="/Identity/Account/Login">Login</a></li>
+            }
+        </ul>
+    </div>
+</nav>
+
+@RenderBody()
+
+<!-- Footer -->
+<footer class="page-footer brown darken-2">
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <p class="white-text center">© @DateTime.Now.Year Automobile Service Center. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+@RenderSection("Scripts", required: false)

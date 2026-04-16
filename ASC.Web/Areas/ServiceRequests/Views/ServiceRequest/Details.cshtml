@@ -1,0 +1,92 @@
+@model ASC.Model.ServiceRequest
+@{
+    ViewData["Title"] = "Service Request Details";
+}
+
+<div class="row">
+    <div class="col s12">
+        <h4 class="brown-text">Service Request Details</h4>
+        <a href="/ServiceRequests/Dashboard/Dashboard" class="btn-flat brown-text">
+            <i class="material-icons left">arrow_back</i>Back to Dashboard
+        </a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col s12 m8">
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">
+                    Request #@Model.UniqueId?.Substring(0, 8)
+                    <span class="badge @(Model.Status == "Completed" ? "green" : Model.Status == "InProgress" ? "blue" : "orange") white-text right">
+                        @Model.Status
+                    </span>
+                </span>
+                <table class="striped">
+                    <tr><td><strong>Customer:</strong></td><td>@Model.CustomerEmail</td></tr>
+                    <tr><td><strong>Vehicle:</strong></td><td>@Model.VehicleName</td></tr>
+                    <tr><td><strong>Reg. No:</strong></td><td>@Model.VehicleRegistrationNumber</td></tr>
+                    <tr><td><strong>Services:</strong></td><td>@Model.RequestedServices</td></tr>
+                    <tr><td><strong>Engineer:</strong></td><td>@(Model.ServiceEngineer ?? "Not assigned")</td></tr>
+                    <tr><td><strong>Requested:</strong></td><td>@Model.RequestedDate?.ToString("dd/MM/yyyy HH:mm")</td></tr>
+                    <tr><td><strong>Completed:</strong></td><td>@(Model.CompletedDate?.ToString("dd/MM/yyyy HH:mm") ?? "-")</td></tr>
+                    <tr><td><strong>Comments:</strong></td><td>@(Model.Comments ?? "-")</td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    @if (User.IsInRole("Admin") || User.IsInRole("Engineer"))
+    {
+        <div class="col s12 m4">
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title">Update Status</span>
+                    <form asp-action="UpdateStatus" method="post">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="id" value="@Model.UniqueId" />
+
+                        @if (User.IsInRole("Admin") && ViewBag.Engineers != null)
+                        {
+                            <div class="input-field">
+                                <select name="engineerEmail">
+                                    <option value="">-- Select Engineer --</option>
+                                    @foreach (var eng in (List<ASC.Model.ApplicationUser>)ViewBag.Engineers)
+                                    {
+                                        <option value="@eng.Email" selected="@(eng.Email == Model.ServiceEngineer)">
+                                            @eng.FirstName (@eng.Email)
+                                        </option>
+                                    }
+                                </select>
+                                <label>Assign Engineer</label>
+                            </div>
+                        }
+
+                        <div class="input-field">
+                            <select name="status">
+                                <option value="Pending" selected="@(Model.Status == "Pending")">Pending</option>
+                                <option value="InProgress" selected="@(Model.Status == "InProgress")">In Progress</option>
+                                <option value="Completed" selected="@(Model.Status == "Completed")">Completed</option>
+                                <option value="Cancelled" selected="@(Model.Status == "Cancelled")">Cancelled</option>
+                            </select>
+                            <label>Status</label>
+                        </div>
+
+                        <button type="submit" class="btn brown darken-2 waves-effect" style="width:100%">
+                            <i class="material-icons left">update</i>Update
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var selects = document.querySelectorAll('select');
+            M.FormSelect.init(selects);
+        });
+    </script>
+}

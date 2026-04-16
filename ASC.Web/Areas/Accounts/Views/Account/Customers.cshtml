@@ -1,0 +1,64 @@
+@model IEnumerable<ASC.Model.ApplicationUser>
+@{
+    ViewData["Title"] = "Customers";
+}
+
+<div class="row">
+    <div class="col s12">
+        <h4 class="brown-text">Customers</h4>
+    </div>
+</div>
+
+@if (TempData["Success"] != null)
+{
+    <div class="row"><div class="col s12">
+        <div class="card-panel green lighten-4 green-text text-darken-2">
+            <i class="material-icons">check_circle</i> @TempData["Success"]
+        </div>
+    </div></div>
+}
+
+<div class="row">
+    <div class="col s12">
+        <div class="card">
+            <div class="card-content">
+                <table class="striped responsive-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Status</th>
+                            <th>Created</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var user in Model)
+                        {
+                            <tr>
+                                <td>@user.FirstName @user.LastName</td>
+                                <td>@user.Email</td>
+                                <td>
+                                    <span class="badge @(user.IsActive ? "green" : "red") white-text">
+                                        @(user.IsActive ? "Active" : "Inactive")
+                                    </span>
+                                </td>
+                                <td>@user.CreatedDate.ToString("dd/MM/yyyy")</td>
+                                <td>
+                                    <a href="/Accounts/Account/ToggleActive/@user.Id"
+                                       class="btn-small @(user.IsActive ? "orange" : "green") waves-effect">
+                                        @(user.IsActive ? "Deactivate" : "Activate")
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                @if (!Model.Any())
+                {
+                    <p class="center-align grey-text">No customers registered yet.</p>
+                }
+            </div>
+        </div>
+    </div>
+</div>

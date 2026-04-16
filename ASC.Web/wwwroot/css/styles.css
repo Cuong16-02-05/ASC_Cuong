@@ -1,0 +1,140 @@
+/* Automobile Service Center - Custom Styles */
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    font-family: 'Roboto', sans-serif;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+/* Logo */
+.logo {
+    height: 50px;
+    margin-top: 7px;
+}
+
+@media only screen and (max-width: 600px) {
+    .logo { height: 35px; }
+}
+
+/* Navigation */
+nav .brand-logo {
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+}
+
+/* Cards */
+.card {
+    border-radius: 8px;
+}
+
+.card .card-title {
+    font-weight: 600;
+}
+
+/* Badges */
+.badge {
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+/* Form validation */
+.input-field .input-validation-error {
+    border-bottom: 1px solid #FF4081;
+    box-shadow: 0 1px 0 0 #FF4081;
+}
+
+.input-field .valid {
+    border-bottom: 1px solid #00E676;
+    box-shadow: 0 1px 0 0 #00E676;
+}
+
+.validation-summary-errors {
+    color: #FF4081;
+    padding: 10px;
+    background: #fff3f3;
+    border-left: 3px solid #FF4081;
+    margin-bottom: 10px;
+}
+
+/* Dashboard cards */
+.dashboard-stat-card {
+    text-align: center;
+    padding: 20px;
+}
+
+/* Sidebar navigation */
+.collapsible-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.collapsible-header a {
+    color: inherit;
+    flex: 1;
+}
+
+.collapsible-body ul li a {
+    padding-left: 50px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Hero section */
+.parallax-container {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Responsive table */
+@media only screen and (max-width: 600px) {
+    .responsive-table td, .responsive-table th {
+        padding: 8px 5px;
+        font-size: 12px;
+    }
+}
+
+/* Footer */
+footer.page-footer {
+    margin-top: 30px;
+}
+
+/* Alert panels */
+.card-panel.green {
+    color: #1b5e20;
+}
+
+.card-panel.red {
+    color: #b71c1c;
+}
+
+/* ── Lab 1: Logo responsive ── */
+.logo { height: 50px; margin-top: 7px; }
+@media only screen and (max-width: 992px) { .logo { height: 40px; } }
+@media only screen and (max-width: 600px) { .logo { height: 32px; } }
+
+/* ── Lab 4: Navigation active state ── */
+.collapsible-header.active { background: rgba(0,0,0,.05); }
+
+/* ── Lab 4: Validation ── */
+.input-field .input-validation-error {
+  border-bottom: 1px solid #FF4081;
+  box-shadow: 0 1px 0 0 #FF4081;
+}
+.input-field .valid {
+  border-bottom: 1px solid #00E676;
+  box-shadow: 0 1px 0 0 #00E676;
+}
+.validation-summary-errors { color: #FF4081; }
+
+/* ── Dashboard badge fix ── */
+span.badge.new::after { content: ''; }

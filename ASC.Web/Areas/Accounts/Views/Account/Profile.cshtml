@@ -1,0 +1,47 @@
+@model ASC.Model.ApplicationUser
+@{
+    ViewData["Title"] = "My Profile";
+}
+
+<div class="row">
+    <div class="col s12"><h4 class="brown-text">My Profile</h4></div>
+</div>
+
+@if (TempData["Success"] != null)
+{
+    <div class="row"><div class="col s12">
+        <div class="card-panel green lighten-4 green-text">@TempData["Success"]</div>
+    </div></div>
+}
+
+<div class="row">
+    <div class="col s12 m6 offset-m3">
+        <div class="card">
+            <div class="card-content">
+                <div class="center-align" style="margin-bottom:20px">
+                    <i class="material-icons brown-text" style="font-size:80px">account_circle</i>
+                    <h5>@Model?.Email</h5>
+                </div>
+                <form asp-action="Profile" method="post">
+                    @Html.AntiForgeryToken()
+                    <div class="input-field">
+                        <input name="firstName" type="text" id="firstName" value="@Model?.FirstName" class="validate" />
+                        <label for="firstName" class="active">First Name</label>
+                    </div>
+                    <div class="input-field">
+                        <input name="lastName" type="text" id="lastName" value="@Model?.LastName" class="validate" />
+                        <label for="lastName" class="active">Last Name</label>
+                    </div>
+                    <button type="submit" class="btn brown darken-2 waves-effect">
+                        <i class="material-icons left">save</i>Save Changes
+                    </button>
+                </form>
+                <div style="margin-top:20px">
+                    <a asp-area="Identity" asp-page="/Account/Manage/ChangePassword" class="btn-flat brown-text">
+                        <i class="material-icons left">lock</i>Change Password
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
